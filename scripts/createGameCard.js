@@ -11,7 +11,9 @@ export function createGameCard(cardDetails) {
 				<span class="game__card-icon">?</span>
 	 		</div>
 	 	<div class="game__card-back">
-			<img src="${cardDetails.src}" alt="" class="game__card-image" />
+			<img src="${cardDetails.src}" alt="" class="game__card-image"
+			data-game-card-name="${cardDetails.imageName}"
+			/>
 	 	</div>
   		</div>
 	</div>

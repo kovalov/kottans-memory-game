@@ -5,5 +5,6 @@ export function getShuffledImages(images, path) {
       id: index,
       isSelected: false,
       src: `${path}/${imageName}`,
+      imageName,
     }));
 }

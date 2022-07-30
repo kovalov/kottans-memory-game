@@ -12,3 +12,9 @@ const shuffledImages = getShuffledImages(cardImages, cardImagePath);
 shuffledImages
   .map((item) => createGameCard(item))
   .forEach((card) => addGameCard(gameContent, card));
+
+gameContent.addEventListener('click', (event) => {
+  const selectedCard = event.target;
+  selectedCard.closest('.game__card').dataset.gameCardSelected =
+    'opened';
+});
