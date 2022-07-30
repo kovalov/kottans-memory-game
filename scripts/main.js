@@ -13,8 +13,27 @@ shuffledImages
   .map((item) => createGameCard(item))
   .forEach((card) => addGameCard(gameContent, card));
 
+let currentSelectedCard = '';
+let previousSelectedCard = '';
+
 gameContent.addEventListener('click', (event) => {
-  const selectedCard = event.target;
-  selectedCard.closest('.game__card').dataset.gameCardSelected =
+  if (!event.target.closest('.game__card')) return;
+
+  currentSelectedCard =
+    event.target.closest('.game__card').dataset.gameCardName;
+  event.target.closest('.game__card').dataset.gameCardSelected =
     'opened';
+
+  //   if (currentSelectedCard && previousSelectedCard) {
+  //     //  currentSelectedCard = '';
+  //     console.log('selected');
+  //   }
+
+  //   if (currentSelectedCard && !previousSelectedCard) {
+  //     previousSelectedCard = currentSelectedCard;
+  //   }
+
+  //   console.log(
+  //     `Current: ${currentSelectedCard} Previous:${previousSelectedCard}`
+  //   );
 });

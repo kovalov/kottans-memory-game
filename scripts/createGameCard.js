@@ -5,6 +5,7 @@ export function createGameCard(cardDetails) {
 	  data-game-card-id="${cardDetails.id}"
 	  data-game-card-status="closed"
 	  data-game-card-selected="${cardDetails.isSelected}"
+	  data-game-card-name="${cardDetails.imageName}"
 		>
   		<div class="game__card-flipper">
 	 		<div class="game__card-front">
@@ -12,7 +13,6 @@ export function createGameCard(cardDetails) {
 	 		</div>
 	 	<div class="game__card-back">
 			<img src="${cardDetails.src}" alt="" class="game__card-image"
-			data-game-card-name="${cardDetails.imageName}"
 			/>
 	 	</div>
   		</div>
