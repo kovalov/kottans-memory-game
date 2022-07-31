@@ -21,9 +21,11 @@ gameContent.addEventListener('click', (event) => {
   if (isActive) {
     if (!event.target.closest('.game__card')) return;
 
+    const { gameCardName: cardName } =
+      event.target.closest('.game__card').dataset;
+
     if (!currentSelectedCard) {
-      currentSelectedCard =
-        event.target.closest('.game__card').dataset.gameCardName;
+      currentSelectedCard = cardName;
       event.target.closest(
         '.game__card'
       ).dataset.gameCardIsOpened = true;
@@ -32,38 +34,33 @@ gameContent.addEventListener('click', (event) => {
 
     if (currentSelectedCard) {
       previousSelectedCard = currentSelectedCard;
-      currentSelectedCard =
-        event.target.closest('.game__card').dataset.gameCardName;
+      currentSelectedCard = cardName;
       event.target.closest(
         '.game__card'
       ).dataset.gameCardIsOpened = true;
       isActive = false;
 
-      if (currentSelectedCard !== previousSelectedCard) {
-        setTimeout(() => {
-          document.querySelector(
-            `[data-game-card-name="${currentSelectedCard}"]`
-          ).dataset.gameCardIsOpened = false;
-          document.querySelector(
-            `[data-game-card-name="${previousSelectedCard}"]`
-          ).dataset.gameCardIsOpened = false;
+      if (currentSelectedCard && previousSelectedCard) {
+        if (currentSelectedCard !== previousSelectedCard) {
+          setTimeout(() => {
+            document.querySelector(
+              `[data-game-card-name="${currentSelectedCard}"]`
+            ).dataset.gameCardIsOpened = false;
 
-          currentSelectedCard = '';
+            document.querySelector(
+              `[data-game-card-name="${previousSelectedCard}"]`
+            ).dataset.gameCardIsOpened = false;
+
+            previousSelectedCard = '';
+            currentSelectedCard = '';
+            isActive = true;
+          }, 1500);
+        } else {
           previousSelectedCard = '';
+          currentSelectedCard = '';
           isActive = true;
-          return;
-        }, 2000);
+        }
       }
-
-      if (currentSelectedCard === previousSelectedCard) {
-        currentSelectedCard = '';
-        previousSelectedCard = '';
-        isActive = true;
-        return;
-      }
-
-      return;
     }
-    return;
   }
 });
