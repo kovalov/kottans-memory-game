@@ -15,25 +15,55 @@ shuffledImages
 
 let currentSelectedCard = '';
 let previousSelectedCard = '';
+let isActive = true;
 
 gameContent.addEventListener('click', (event) => {
-  if (!event.target.closest('.game__card')) return;
+  if (isActive) {
+    if (!event.target.closest('.game__card')) return;
 
-  currentSelectedCard =
-    event.target.closest('.game__card').dataset.gameCardName;
-  event.target.closest('.game__card').dataset.gameCardSelected =
-    'opened';
+    if (!currentSelectedCard) {
+      currentSelectedCard =
+        event.target.closest('.game__card').dataset.gameCardName;
+      event.target.closest(
+        '.game__card'
+      ).dataset.gameCardIsOpened = true;
+      return;
+    }
 
-  //   if (currentSelectedCard && previousSelectedCard) {
-  //     //  currentSelectedCard = '';
-  //     console.log('selected');
-  //   }
+    if (currentSelectedCard) {
+      previousSelectedCard = currentSelectedCard;
+      currentSelectedCard =
+        event.target.closest('.game__card').dataset.gameCardName;
+      event.target.closest(
+        '.game__card'
+      ).dataset.gameCardIsOpened = true;
+      isActive = false;
 
-  //   if (currentSelectedCard && !previousSelectedCard) {
-  //     previousSelectedCard = currentSelectedCard;
-  //   }
+      if (currentSelectedCard !== previousSelectedCard) {
+        setTimeout(() => {
+          document.querySelector(
+            `[data-game-card-name="${currentSelectedCard}"]`
+          ).dataset.gameCardIsOpened = false;
+          document.querySelector(
+            `[data-game-card-name="${previousSelectedCard}"]`
+          ).dataset.gameCardIsOpened = false;
 
-  //   console.log(
-  //     `Current: ${currentSelectedCard} Previous:${previousSelectedCard}`
-  //   );
+          currentSelectedCard = '';
+          previousSelectedCard = '';
+          isActive = true;
+          return;
+        }, 2000);
+      }
+
+      if (currentSelectedCard === previousSelectedCard) {
+        currentSelectedCard = '';
+        previousSelectedCard = '';
+        isActive = true;
+        return;
+      }
+
+      return;
+    }
+    return;
+  }
 });

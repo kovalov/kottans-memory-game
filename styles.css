@@ -99,14 +99,10 @@ body {
 	display: block;
 }
 
-[data-game-card-selected="opened"] .game__card-flipper {
-	transform: rotateY(180deg);
+[data-game-card-is-opened="true"] {
+	pointer-events: none;
 }
 
-/* .opened {
+[data-game-card-is-opened="true"] .game__card-flipper {
 	transform: rotateY(180deg);
-} */
-
-/* .game__card:hover .game__card-flipper {
-	transform: rotateY(180deg);
-} */
+}

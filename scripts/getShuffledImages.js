@@ -4,6 +4,7 @@ export function getShuffledImages(images, path) {
     .map((imageName, index) => ({
       id: index,
       isSelected: false,
+      isMatched: false,
       src: `${path}/${imageName}`,
       imageName,
     }));

@@ -2,9 +2,7 @@ export function createGameCard(cardDetails) {
   const cardElement = document.createElement('div');
   cardElement.innerHTML = `
   	<div class="game__card"
-	  data-game-card-id="${cardDetails.id}"
-	  data-game-card-status="closed"
-	  data-game-card-selected="${cardDetails.isSelected}"
+	  data-game-card-is-opened="false"
 	  data-game-card-name="${cardDetails.imageName}"
 		>
   		<div class="game__card-flipper">
