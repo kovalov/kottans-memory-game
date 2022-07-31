@@ -17,7 +17,7 @@ let currentSelectedCard = '';
 let previousSelectedCard = '';
 let isActive = true;
 
-gameContent.addEventListener('click', (event) => {
+function handleClick(event) {
   if (isActive) {
     if (!event.target.closest('.game__card')) return;
 
@@ -55,4 +55,6 @@ gameContent.addEventListener('click', (event) => {
       }
     }
   }
-});
+}
+
+gameContent.addEventListener('click', handleClick);
