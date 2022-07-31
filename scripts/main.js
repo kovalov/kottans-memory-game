@@ -30,9 +30,6 @@ gameContent.addEventListener('click', (event) => {
     if (currentSelectedCard) {
       previousSelectedCard = event.target.closest('.game__card');
       previousSelectedCard.dataset.gameCardIsOpened = true;
-      console.log(
-        `Curr: ${currentSelectedCard.dataset.gameCardName}; Prev: ${previousSelectedCard.dataset.gameCardName}`
-      );
       isActive = false;
 
       const { gameCardName: currName } = currentSelectedCard.dataset;
