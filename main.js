@@ -90,7 +90,7 @@ function checkWin() {
   const HTML = `
 	<h1 class="game__menu-title">You win!</h1>
 	<p class="game__menu-description">
-	  It has taken ${timesClicked} clicks.
+	  You have made ${timesClicked} clicks.
 	</p>
 	<button class="game__menu-button" data-button="start">
 	  Play Again
@@ -121,12 +121,13 @@ function handleClick(event) {
       const { name: previousCardName } = previousCard.dataset;
 
       if (currentCardName !== previousCardName) {
-        setTimeout(() => {
+        const timer = setTimeout(() => {
           currentCard.dataset.isOpened = false;
           previousCard.dataset.isOpened = false;
 
           clearVariables();
           isActive = true;
+          clearTimeout(timer);
 
           return;
         }, 1000);
