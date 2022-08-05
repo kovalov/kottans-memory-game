@@ -31,7 +31,7 @@ function getShuffledImages(imageNames, filePath) {
 function createCard(cardDetails) {
   const cardElement = document.createElement('div');
   cardElement.innerHTML = `
-		<div class="game__card"
+	 <div class="game__card"
 		data-is-opened="false"
 		data-name="${cardDetails.imageName}"
 		 >
@@ -87,7 +87,7 @@ function checkWin() {
   gameContainer.dataset.isActive = false;
 
   gameMenu.innerHTML = '';
-  const HTML = `
+  const successMessage = `
 	<h1 class="game__menu-title">You win!</h1>
 	<p class="game__menu-description">
 	  You have made ${timesClicked} clicks.
@@ -97,16 +97,15 @@ function checkWin() {
 	</button>
 	`;
 
-  gameMenu.innerHTML = HTML;
+  gameMenu.innerHTML = successMessage;
 }
 
 function handleClick(event) {
-  timesClicked++;
-
   if (isActive) {
     if (!event.target.closest('.game__card')) return;
 
     if (!currentCard) {
+      timesClicked++;
       currentCard = event.target.closest('.game__card');
       currentCard.dataset.isOpened = true;
       return;
@@ -117,29 +116,24 @@ function handleClick(event) {
       previousCard.dataset.isOpened = true;
       isActive = false;
 
-      const { name: currentCardName } = currentCard.dataset;
-      const { name: previousCardName } = previousCard.dataset;
-
-      if (currentCardName !== previousCardName) {
-        const timer = setTimeout(() => {
-          currentCard.dataset.isOpened = false;
-          previousCard.dataset.isOpened = false;
-
-          clearVariables();
-          isActive = true;
-          clearTimeout(timer);
-
-          return;
-        }, 1000);
-      }
-
-      if (currentCardName === previousCardName) {
+      if (currentCard.dataset.name === previousCard.dataset.name) {
         timesMatched++;
-
         checkWin();
-        clearVariables();
+        currentCard = '';
+        previousCard = '';
         isActive = true;
         return;
+      }
+
+      if (currentCard.dataset.name !== previousCard.dataset.name) {
+        setTimeout(() => {
+          currentCard.dataset.isOpened = false;
+          previousCard.dataset.isOpened = false;
+          currentCard = '';
+          previousCard = '';
+          isActive = true;
+          return;
+        }, 1000);
       }
     }
   }
